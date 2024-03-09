@@ -1,0 +1,18 @@
+services:
+
+  api:
+    build: ./api
+    command: bash -c "npm run start:dev"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/usr/src/app/dev
+
+  web:
+    build: ./web
+    ports:
+      - 80:4200
+    volumes:
+      - ./web:/home/dev
+    working_dir: /home/dev
+    command: ../node_modules/.bin/ng serve --host 0.0.0.0
