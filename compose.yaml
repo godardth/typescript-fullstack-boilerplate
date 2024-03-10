@@ -1,5 +1,18 @@
 services:
 
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - psql:/var/lib/postgresql/data
+      - ./test_database.sql:/docker-entrypoint-initdb.d/test_database.sql
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=app
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+
   api:
     build: ./api
     command: bash -c "npm run start:dev"
@@ -7,6 +20,8 @@ services:
       - 3000:3000
     volumes:
       - ./api:/usr/src/app/dev
+    depends_on:
+      - db
 
   web:
     build: ./web
@@ -16,3 +31,8 @@ services:
       - ./web:/home/dev
     working_dir: /home/dev
     command: ../node_modules/.bin/ng serve --host 0.0.0.0
+    depends_on:
+      - api
+
+volumes:
+  psql:
