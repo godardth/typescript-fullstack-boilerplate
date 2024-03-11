@@ -6,7 +6,6 @@ services:
       - 5432:5432
     volumes:
       - psql:/var/lib/postgresql/data
-      - ./test_database.sql:/docker-entrypoint-initdb.d/test_database.sql
     environment:
       - POSTGRES_HOST=db
       - POSTGRES_DB=app
