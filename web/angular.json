@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/material-theme.scss",
               "src/styles.sass"
             ],
             "scripts": []
@@ -93,6 +94,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/material-theme.scss",
               "src/styles.sass"
             ],
             "scripts": []
@@ -100,5 +102,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
