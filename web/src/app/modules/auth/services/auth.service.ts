@@ -18,10 +18,6 @@ export class AuthService {
     private router: Router
   ) {}
 
-  handleError(): void {
-    localStorage.removeItem('auth-token');
-  }
-
   isAuthenticated(): boolean {
     return localStorage.getItem('auth-token') ? true : false;
   }
@@ -33,10 +29,10 @@ export class AuthService {
     ).subscribe({
         next: (v: any) => {
           localStorage.setItem('auth-token', v['access_token'] );
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
         },
         error: (err: any) => {
-          this.handleError; 
+          this.logout(); 
           throw err; 
         },
         complete: undefined 
@@ -49,7 +45,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('auth-token');
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
 }

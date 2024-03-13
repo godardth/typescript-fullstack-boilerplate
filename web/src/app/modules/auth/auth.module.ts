@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './services/auth.service';
+import { GuardService } from './services/guard.service';
 
 @NgModule({
   imports: [
@@ -19,6 +21,10 @@ import { LoginComponent } from './components/login/login.component';
   ],
   declarations: [
     LoginComponent
+  ],
+  providers: [
+    AuthService,
+    GuardService
   ],
   exports: [
     LoginComponent
