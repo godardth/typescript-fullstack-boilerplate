@@ -10,6 +10,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DemoComponent } from './components/demo/demo.component';
+import { AuthInterceptor } from './modules/auth/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { DemoComponent } from './components/demo/demo.component';
     ProfileComponent,
     DemoComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [
     AppComponent
   ]
