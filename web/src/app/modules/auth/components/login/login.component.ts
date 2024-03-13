@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'auth-login',
@@ -7,6 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent {
+
+  constructor(private authService: AuthService) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -17,7 +20,9 @@ export class LoginComponent {
   get passwordErrors() { return this.loginForm.get('password')?.errors; }
 
   onSubmit() {
-    // TO-DO
+    let email = this.loginForm.get('email')?.value;
+    let pwd = this.loginForm.get('password')?.value;
+    if (email && pwd) this.authService.login(email, pwd);
   }
 
 }
