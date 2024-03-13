@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
 import { GuardService } from './modules/auth/services/guard.service';
-import { ProfileComponent } from './components/profile/profile.component';
+import { DemoComponent } from './components/demo/demo.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
       {
         path: '',
         canActivate: [ GuardService ],
-        component: ProfileComponent
+        component: DemoComponent
       },
     ]
   }

@@ -1,1 +1,5 @@
-<p>profile works!</p>
+<div class="user-card">
+    First Name: {{ (authService.user$ | async)?.firstName }}
+</div>
+
+<button mat-flat-button color="primary" (click)="authService.logout()">Logout</button>
