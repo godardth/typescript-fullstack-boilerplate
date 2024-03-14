@@ -51,6 +51,12 @@ export class AuthService {
     })
   }
 
+  signup(user: User) {
+    let url = env.backend + 'auth/signup/';
+    let payload = JSON.stringify(user);
+    this.http.post(url, payload, {headers: this.headers}).subscribe();
+  }
+
   logout(): void {
     this.token$.next('');
   }

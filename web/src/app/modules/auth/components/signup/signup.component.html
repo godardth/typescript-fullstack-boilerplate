@@ -1,0 +1,26 @@
+<form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email">
+        <mat-error *ngIf="emailErrors?.['email']">Email is invalid</mat-error>
+        <mat-error *ngIf="emailErrors?.['required']">Email is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="passwordErrors?.['required']">Password is required</mat-error>
+    </mat-form-field>
+    <div class="form-name-container">
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName">
+            <mat-error *ngIf="firstNameErrors?.['required']">First name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName">
+            <mat-error *ngIf="lastNameErrors?.['required']">Last name is required</mat-error>
+        </mat-form-field>
+    </div>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!signupForm.valid">Signup</button>
+</form>

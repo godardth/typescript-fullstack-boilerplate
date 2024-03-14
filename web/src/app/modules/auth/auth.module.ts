@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { GuardService } from './services/guard.service';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -17,17 +20,20 @@ import { GuardService } from './services/guard.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    LoginSignupComponent
   ],
   providers: [
     AuthService,
     GuardService
   ],
   exports: [
-    LoginComponent
+    LoginSignupComponent
   ]
 })
 export class AuthModule { }
