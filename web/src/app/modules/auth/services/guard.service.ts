@@ -13,7 +13,8 @@ export class GuardService implements CanActivate {
   ) {}
 
   canActivate() {
-    let loggedIn = this.authService.token$.value ? true : false;
+    let authToken = localStorage.getItem('auth-token');
+    let loggedIn = authToken ? true : false;
     if (!loggedIn) this.router.navigate(['/login']);
     return true;
   }

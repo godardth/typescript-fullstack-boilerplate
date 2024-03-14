@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { randomBytes } from 'crypto';
 
 @Injectable()
 export class UsersService {
@@ -12,8 +13,9 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(createCatDto: CreateUserDto) {
-    return this.userRepository.save(createCatDto);
+  async create(createUserDto: CreateUserDto) {
+    createUserDto.activationToken = randomBytes(64).toString('hex');
+    return this.userRepository.save(createUserDto);
   }
 
   async findAll(): Promise<User[]> {
@@ -28,8 +30,8 @@ export class UsersService {
     return this.userRepository.findOneBy({email: email});
   }
 
-  async update(id: number, updateCatDto: UpdateUserDto) {
-    return this.userRepository.save(updateCatDto);
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return this.userRepository.save(updateUserDto);
   }
 
   async remove(id: number) {

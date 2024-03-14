@@ -20,10 +20,10 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { email: user.email, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    if (!user) return undefined;
+    if (user.activationToken) return user;
+    user.accessToken = this.jwtService.sign({ email: user.email, sub: user.userId });
+    return user;
   }
 
 }

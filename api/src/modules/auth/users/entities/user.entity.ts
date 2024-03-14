@@ -18,5 +18,10 @@ export class User {
     @Column()
     lastName: string;
 
+    @Column({ nullable: true })
+    activationToken: string;
+
+    accessToken: string;
+
 }
 
