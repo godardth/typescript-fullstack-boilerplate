@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { RouterModule } from '@nestjs/core';
+import { Module, ClassSerializerInterceptor } from '@nestjs/common';
+import { RouterModule, Reflector } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AnimalsModule } from './modules/animals/animals.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/auth/guards/jwt-auth.guard';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
 const routes = [
 	{ path: 'animals', module: AnimalsModule },
@@ -26,6 +26,15 @@ const routes = [
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      inject: [ Reflector ],
+      useFactory: (reflector: Reflector) => {
+        return new ClassSerializerInterceptor(reflector, {
+          enableImplicitConversion: true
+        });
+      }
     }
   ]
 })

@@ -3,7 +3,7 @@ export class User {
     firstName?: string;
     lastName?: string;
     email?: string;
-    activationToken?: string;
+    isActivated?: boolean;
     accessToken?: string;
 
     constructor(user: any) {

@@ -11,6 +11,8 @@ import { UsersController } from './users/users.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { MailModule } from '../mail/mail.module';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -23,11 +25,16 @@ import { MailModule } from '../mail/mail.module';
     MailModule
   ],
   providers: [
+    JwtAuthGuard,
     AuthService,
     JwtStrategy,
     LocalStrategy,
     UsersService,
-    ...userProviders
+    ...userProviders,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    }
   ],
   controllers: [
     AuthController,
