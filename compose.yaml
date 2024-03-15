@@ -14,9 +14,10 @@ services:
 
   api:
     build: ./api
-    command: bash -c "npm run start:dev"
+    command: bash -c "npm run start:debug"
     ports:
       - 3000:3000
+      - 9229:9229
     volumes:
       - ./api:/usr/src/app/dev
     depends_on:
