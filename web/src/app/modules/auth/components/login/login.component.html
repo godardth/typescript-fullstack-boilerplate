@@ -15,4 +15,5 @@
 
 <div class="not-activated-notice" *ngIf="(authService.user$ | async) && !(authService.user$ | async)?.isActivated">
     Your account is not activated, please check your email.
+    <a (click)="sendActivationLink()">Resend email</a>
 </div>

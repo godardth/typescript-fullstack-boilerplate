@@ -30,7 +30,7 @@ export class UsersService {
     return this.userRepository.findOneBy({email: email});
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(updateUserDto: UpdateUserDto) {
     return this.userRepository.save(updateUserDto);
   }
 

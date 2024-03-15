@@ -12,7 +12,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { MailModule } from '../mail/mail.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { APP_GUARD } from '@nestjs/core';
+import { ActivatedGuard } from './auth/guards/activated.guard';
 
 @Module({
   imports: [
@@ -26,15 +26,12 @@ import { APP_GUARD } from '@nestjs/core';
   ],
   providers: [
     JwtAuthGuard,
+    ActivatedGuard,
     AuthService,
     JwtStrategy,
     LocalStrategy,
     UsersService,
-    ...userProviders,
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard,
-    }
+    ...userProviders
   ],
   controllers: [
     AuthController,

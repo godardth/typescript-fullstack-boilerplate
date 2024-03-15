@@ -6,9 +6,7 @@ import { User } from '../../users/entities/user.entity';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
 
-	constructor(
-		private reflector: Reflector
-	) {
+	constructor(private reflector: Reflector) {
 		super();
 	}
 
@@ -18,11 +16,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 	}
 
 	handleRequest(err: any, user: any, info: any, context: ExecutionContext) {
-		const result = super.handleRequest(err, user, info, context);
-		if (user && typeof user === 'object') {
-			return new User(user);
-			// return this.userService.findOne(user.id);
-		}
+		super.handleRequest(err, user, info, context);
+		if (user && typeof user === 'object') return new User(user);
 		return user;
 	}
 

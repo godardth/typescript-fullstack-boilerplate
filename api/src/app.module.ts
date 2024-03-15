@@ -6,6 +6,7 @@ import { AnimalsModule } from './modules/animals/animals.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/auth/guards/jwt-auth.guard';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { ActivatedGuard } from './modules/auth/auth/guards/activated.guard';
 
 const routes = [
 	{ path: 'animals', module: AnimalsModule },
@@ -23,10 +24,8 @@ const routes = [
   ],
   providers: [
     AppService,
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard,
-    },
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    { provide: APP_GUARD, useClass: ActivatedGuard },
     {
       provide: APP_INTERCEPTOR,
       inject: [ Reflector ],

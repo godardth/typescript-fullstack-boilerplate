@@ -1,5 +1,13 @@
 <div class="user-card">
-    First Name: {{ (authService.user$ | async)?.firstName }}
+    <div class="profile-info">
+        <div class="name">{{ (authService.user$ | async)?.firstName }} {{ (authService.user$ | async)?.lastName }}</div>
+        <div class="email">{{ (authService.user$ | async)?.email }}</div>
+    </div>
+
+    <div class="profile-actions">
+        <button mat-flat-button color="primary" (click)="authService.logout()">Logout</button>
+        <button mat-flat-button color="warn" (click)="authService.deleteAccount()">Delete Account</button>
+    </div>
+
 </div>
 
-<button mat-flat-button color="primary" (click)="authService.logout()">Logout</button>

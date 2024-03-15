@@ -22,7 +22,6 @@ export class AuthService {
 
   async login(user: User) {
     if (!user) return undefined;
-    if (user.activationToken) return user;
     user.accessToken = this.jwtService.sign({ email: user.email, sub: user.id });
     return user;
   }

@@ -32,7 +32,7 @@ export class AuthService {
     this.user$.subscribe((user: User|undefined) => {
       this.token = user?.accessToken ? user?.accessToken : '';
       if (user?.accessToken) localStorage.setItem('auth-token', user?.accessToken);
-      this.router.navigate([user ? '/' : '/login']);
+      this.router.navigate([user?.isActivated ? '/' : '/login']);
     });
 
   }
@@ -51,6 +51,21 @@ export class AuthService {
       next: (user: any) => this.user$.next(new User(user)),
       error: () => this.user$.next(undefined)
     });
+  }
+
+  sendActivationMail() {
+    this.http.get(`${env.backend}auth/sendmail/`, { headers: this.headers }).subscribe();
+  }
+
+  activate(email: string, token: string) {
+    this.http.post(`${env.backend}auth/activate/`, { email: email, activationToken: token }, { headers: this.headers }).subscribe({
+      next: (user: any) => this.user$.next(new User(user)),
+      error: () => this.user$.next(undefined)
+    });
+  }
+
+  deleteAccount() {
+    this.http.delete(`${env.backend}auth/delete/`).subscribe(() => this.logout());
   }
 
   signup(user: User) {

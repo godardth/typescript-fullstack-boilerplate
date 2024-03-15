@@ -25,4 +25,8 @@ export class LoginComponent {
     if (email && pwd) this.authService.login(email, pwd);
   }
 
+  sendActivationLink() {
+    this.authService.sendActivationMail();
+  }
+
 }
