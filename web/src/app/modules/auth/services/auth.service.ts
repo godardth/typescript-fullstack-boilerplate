@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { env } from '../../../env';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user';
+import { EnvService } from 'src/app/env.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private envService: EnvService
   ) {
     
     // Load the current user if an access token exists
@@ -38,7 +39,8 @@ export class AuthService {
   }
 
   login(email?: string, password?: string) {
-    let url = `${env.backend}auth/login/`;
+    let baseUrl = this.envService.getBaseUrl();
+    let url = `${baseUrl}auth/login/`;
     let payload = JSON.stringify({ email: email, password: password });
     this.http.post(url, email ? payload : undefined, { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
@@ -47,29 +49,34 @@ export class AuthService {
   }
 
   getUser() {
-    this.http.get(`${env.backend}auth/login/`, { headers: this.headers }).subscribe({
+    let baseUrl = this.envService.getBaseUrl();
+    this.http.get(`${baseUrl}auth/login/`, { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
       error: () => this.user$.next(undefined)
     });
   }
 
   sendActivationMail() {
-    this.http.get(`${env.backend}auth/sendmail/`, { headers: this.headers }).subscribe();
+    let baseUrl = this.envService.getBaseUrl();
+    this.http.get(`${baseUrl}auth/sendmail/`, { headers: this.headers }).subscribe();
   }
 
   activate(email: string, token: string) {
-    this.http.post(`${env.backend}auth/activate/`, { email: email, activationToken: token }, { headers: this.headers }).subscribe({
+    let baseUrl = this.envService.getBaseUrl();
+    this.http.post(`${baseUrl}auth/activate/`, { email: email, activationToken: token }, { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
       error: () => this.user$.next(undefined)
     });
   }
 
   deleteAccount() {
-    this.http.delete(`${env.backend}auth/delete/`).subscribe(() => this.logout());
+    let baseUrl = this.envService.getBaseUrl();
+    this.http.delete(`${baseUrl}auth/delete/`).subscribe(() => this.logout());
   }
 
   signup(user: User) {
-    let url = `${env.backend}auth/signup/`;
+    let baseUrl = this.envService.getBaseUrl();
+    let url = `${baseUrl}auth/signup/`;
     let payload = JSON.stringify(user);
     this.http.post(url, payload, { headers: this.headers }).subscribe();
   }

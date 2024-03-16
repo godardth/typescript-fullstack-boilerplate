@@ -7,16 +7,16 @@ services:
     volumes:
       - psql:/var/lib/postgresql/data
     environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=app
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
   api:
     build: ./api
     command: bash -c "npm run start:debug"
     ports:
-      - 3000:3000
+      - ${BACKEND_PORT}:${BACKEND_PORT}
       - 9229:9229
     volumes:
       - ./api:/usr/src/app/dev
@@ -24,13 +24,18 @@ services:
       - db
 
   web:
-    build: ./web
+    build: 
+      context: ./web
     ports:
-      - 80:4200
+      - ${FRONTEND_PORT}:4200
+    environment:
+      - BACKEND_PROT=${BACKEND_PROT}
+      - BACKEND_HOST=${BACKEND_HOST}
+      - BACKEND_PORT=${BACKEND_PORT}
     volumes:
       - ./web:/home/dev
     working_dir: /home/dev
-    command: ../node_modules/.bin/ng serve --host 0.0.0.0
+    command: sh ./startup-dev-server.sh
     depends_on:
       - api
 

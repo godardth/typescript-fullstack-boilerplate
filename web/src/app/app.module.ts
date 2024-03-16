@@ -13,6 +13,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { AuthInterceptor } from './modules/auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EnvService } from './env.service';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     DemoComponent
   ],
   providers: [
+    EnvService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [

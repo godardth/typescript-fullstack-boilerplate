@@ -1,3 +1,5 @@
 export const env: any = {
-    backend: 'http://localhost:3000/'
+    backend_prot: 'http',
+    backend_host: 'localhost',
+    backend_port: '3000'
 };
