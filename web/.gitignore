@@ -38,3 +38,6 @@ typings
 # System files
 .DS_Store
 Thumbs.db
+
+# Compiled Environment
+app/env/env.ts

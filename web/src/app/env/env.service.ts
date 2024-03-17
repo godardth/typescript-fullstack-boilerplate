@@ -6,7 +6,7 @@ import { env } from './env';
 })
 export class EnvService {
 
-  getBaseUrl() {
+  get backendUrl() {
     return `${env.backend_prot}://${env.backend_host}${env.backend_port?':':''}${env.backend_port}/`;
   }
 
