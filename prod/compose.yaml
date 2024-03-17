@@ -23,7 +23,7 @@ services:
     volumes_from:
       - nginx-proxy
     environment:
-      - DEFAULT_EMAIL=admin@domain.com
+      - DEFAULT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
       - nginx-proxy
     restart: always
@@ -34,9 +34,9 @@ services:
     volumes:
       - registry:/var/lib/registry
     environment:
-      - VIRTUAL_HOST=registry.domain.com
-      - LETSENCRYPT_HOST=registry.domain.com
-      - LETSENCRYPT_EMAIL=admin@domain.com
+      - VIRTUAL_HOST=${DOMAIN_REGISTRY}
+      - LETSENCRYPT_HOST=${DOMAIN_REGISTRY}
+      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
       - nginx-proxy-acme
     restart: always
@@ -56,9 +56,9 @@ services:
       - jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - VIRTUAL_HOST=jenkins.domain.com
-      - LETSENCRYPT_HOST=jenkins.domain.com
-      - LETSENCRYPT_EMAIL=admin@domain.com
+      - VIRTUAL_HOST=${DOMAIN_JENKINS}
+      - LETSENCRYPT_HOST=${DOMAIN_JENKINS}
+      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
       - VIRTUAL_PORT=8080
     depends_on:
       - nginx-proxy-acme
@@ -67,21 +67,20 @@ services:
   ## APP
   api:
     image: localhost:5001/app/api:latest
-    command: sh -c "bash -c "npm run start:prod"
+    command: sh -c "bash -c npm run start:prod"
     environment:
       - VIRTUAL_HOST=api.app.com
       - VIRTUAL_PORT=8010
-      - LETSENCRYPT_HOST=api.olmayo.com
-      - LETSENCRYPT_EMAIL=admin@domain.com
+      - LETSENCRYPT_HOST=${DOMAIN_API}
+      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     restart: always
   web:
     image: localhost:5001/app/web:latest
     working_dir: /home/dev
     environment:
-      - BACKEND_BASE_URL=api.app.com
-      - VIRTUAL_HOST=app.com,www.app.com
-      - LETSENCRYPT_HOST=app.com,www.app.com
-      - LETSENCRYPT_EMAIL=admin@domain.com
+      - VIRTUAL_HOST=${DOMAIN_WEB}
+      - LETSENCRYPT_HOST=${DOMAIN_WEB}
+      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
       - nginx-proxy-acme
     restart: always
