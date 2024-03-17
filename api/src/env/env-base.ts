@@ -12,6 +12,7 @@ export const env: any = {
     database_name: 'DATABASE_NAME_PLACEHOLDER',
     database_user: 'DATABASE_USER_PLACEHOLDER',
     database_password: 'DATABASE_PASSWORD_PLACEHOLDER',
+    database_sync: 'DATABASE_SYNC_PLACEHOLDER',
 
     // SMTP
     smtp_host: 'SMTP_HOST_PLACEHOLDER',

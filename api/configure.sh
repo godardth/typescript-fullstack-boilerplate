@@ -11,6 +11,7 @@ sed -i -e 's|DATABASE_PORT_PLACEHOLDER|'$DATABASE_PORT'|g' src/env/env.ts
 sed -i -e 's|DATABASE_NAME_PLACEHOLDER|'$DATABASE_NAME'|g' src/env/env.ts
 sed -i -e 's|DATABASE_USER_PLACEHOLDER|'$DATABASE_USER'|g' src/env/env.ts
 sed -i -e 's|DATABASE_PASSWORD_PLACEHOLDER|'$DATABASE_PASSWORD'|g' src/env/env.ts
+sed -i -e 's|DATABASE_SYNC_PLACEHOLDER|'$DATABASE_SYNC'|g' src/env/env.ts
 
 sed -i -e 's|SMTP_HOST_PLACEHOLDER|'$SMTP_HOST'|g' src/env/env.ts
 sed -i -e 's|SMTP_PORT_PLACEHOLDER|'$SMTP_PORT'|g' src/env/env.ts
