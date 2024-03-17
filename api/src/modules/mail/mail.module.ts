@@ -3,17 +3,18 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MailService } from './services/mail.service';
 import { join } from 'path';
+import { env } from '../../env/env';
 
 @Module({
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: 'smtp-relay.brevo.com',
-        port: 587,
+        host: env.smtp_host,
+        port: env.smtp_port,
         secure: false,
         auth: {
-          user: 'theo.godard@gmail.com',
-          pass: 'nD4HwcxgIT8qmrVt',
+          user: env.smtp_user,
+          pass: env.smtp_password,
         },
       },
       defaults: {

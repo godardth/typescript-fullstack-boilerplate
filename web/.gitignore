@@ -39,5 +39,5 @@ typings
 .DS_Store
 Thumbs.db
 
-# Compiled Environment
+# Compiled Environment Variables
 app/env/env.ts
