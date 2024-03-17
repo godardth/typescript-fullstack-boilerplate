@@ -16,4 +16,4 @@ import { DatabaseModule } from '../database/database.module';
         ...catProviders
     ]
 })
-export class AnimalsModule {}
+export class DemoModule {}

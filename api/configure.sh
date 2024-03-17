@@ -16,3 +16,5 @@ sed -i -e 's|SMTP_HOST_PLACEHOLDER|'$SMTP_HOST'|g' src/env/env.ts
 sed -i -e 's|SMTP_PORT_PLACEHOLDER|'$SMTP_PORT'|g' src/env/env.ts
 sed -i -e 's|SMTP_USER_PLACEHOLDER|'$SMTP_USER'|g' src/env/env.ts
 sed -i -e 's|SMTP_PASSWORD_PLACEHOLDER|'$SMTP_PASSWORD'|g' src/env/env.ts
+
+sed -i -e 's|JWT_SECRET_PLACEHOLDER|'$JWT_SECRET'|g' src/env/env.ts

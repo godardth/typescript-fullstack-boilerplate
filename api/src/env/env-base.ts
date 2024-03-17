@@ -17,6 +17,9 @@ export const env: any = {
     smtp_host: 'SMTP_HOST_PLACEHOLDER',
     smtp_port: 'SMTP_PORT_PLACEHOLDER',
     smtp_user: 'SMTP_USER_PLACEHOLDER',
-    smtp_password: 'SMTP_PASSWORD_PLACEHOLDER'
+    smtp_password: 'SMTP_PASSWORD_PLACEHOLDER',
+
+    // JWT
+    jwt_secret: 'JWT_SECRET_PLACEHOLDER'
 
 };

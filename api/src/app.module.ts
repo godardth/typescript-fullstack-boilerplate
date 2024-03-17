@@ -1,29 +1,19 @@
 import { Module, ClassSerializerInterceptor } from '@nestjs/common';
-import { RouterModule, Reflector } from '@nestjs/core';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AnimalsModule } from './modules/animals/animals.module';
+import { RouterModule, Reflector, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { DemoModule } from './modules/demo/demo.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/auth/guards/jwt-auth.guard';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ActivatedGuard } from './modules/auth/auth/guards/activated.guard';
-
-const routes = [
-	{ path: 'animals', module: AnimalsModule },
-	{ path: 'auth', module: AuthModule }
-];
+import { routes } from './app.routing';
 
 @Module({
   imports: [
-    AnimalsModule,
+    DemoModule,
     AuthModule,
     RouterModule.register(routes)
   ],
-  controllers: [
-    AppController
-  ],
+  controllers: [],
   providers: [
-    AppService,
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: ActivatedGuard },
     {

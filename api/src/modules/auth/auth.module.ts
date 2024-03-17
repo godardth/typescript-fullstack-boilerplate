@@ -9,17 +9,17 @@ import { userProviders } from './users/users.providers';
 import { DatabaseModule } from '../database/database.module';
 import { UsersController } from './users/users.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
 import { MailModule } from '../mail/mail.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { ActivatedGuard } from './auth/guards/activated.guard';
+import { env } from '../../env/env';
 
 @Module({
   imports: [
     DatabaseModule,
     PassportModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: env.jwt_secret,
       signOptions: { expiresIn: '1d' },
     }),
     MailModule
