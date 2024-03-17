@@ -17,8 +17,13 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Post()
+  post(@Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(updateUserDto);
+  }
+
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  patch(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(updateUserDto);
   }
 

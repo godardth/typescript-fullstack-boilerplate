@@ -56,6 +56,14 @@ export class AuthService {
     });
   }
 
+  saveUser(user?: User) {
+    let baseUrl = this.envService.getBaseUrl();
+    this.http.post(`${baseUrl}auth/users/`, JSON.stringify(user), { headers: this.headers }).subscribe({
+      next: (user: any) => this.user$.next(new User(user)),
+      error: () => this.user$.next(undefined)
+    });
+  }
+
   sendActivationMail() {
     let baseUrl = this.envService.getBaseUrl();
     this.http.get(`${baseUrl}auth/sendmail/`, { headers: this.headers }).subscribe();
