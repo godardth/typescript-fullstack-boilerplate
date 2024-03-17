@@ -51,7 +51,7 @@ services:
   ## JENKINS
   jenkins:
     build:
-      context: ./app/prod/jenkins
+      context: ./jenkins
     volumes:
       - jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
@@ -69,10 +69,12 @@ services:
     image: localhost:5001/app/api:latest
     command: sh -c "bash -c npm run start:prod"
     environment:
-      - VIRTUAL_HOST=api.app.com
-      - VIRTUAL_PORT=8010
+      - VIRTUAL_HOST=${DOMAIN_API}
+      - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=${DOMAIN_API}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
+    depends_on:
+      - registry-local
     restart: always
   web:
     image: localhost:5001/app/web:latest
@@ -83,6 +85,7 @@ services:
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
       - nginx-proxy-acme
+      - registry-local
     restart: always
 
   ## WATCHTOWER
