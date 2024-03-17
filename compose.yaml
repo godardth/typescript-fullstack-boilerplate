@@ -3,11 +3,12 @@ services:
   db:
     image: postgres
     ports:
-      - 5432:5432
+      - ${DATABASE_PORT}:${DATABASE_PORT}
     volumes:
       - psql:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST=${DATABASE_HOST}
+      - POSTGRES_PORT=${DATABASE_PORT}
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
@@ -24,6 +25,7 @@ services:
       - FRONTEND_PORT=${FRONTEND_PORT}
       - DATABASE_TYPE=${DATABASE_TYPE}
       - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}

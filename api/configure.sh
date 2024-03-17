@@ -7,6 +7,7 @@ sed -i -e 's|FRONTEND_PORT_PLACEHOLDER|'$FRONTEND_PORT'|g' src/env/env.ts
 
 sed -i -e 's|DATABASE_TYPE_PLACEHOLDER|'$DATABASE_TYPE'|g' src/env/env.ts
 sed -i -e 's|DATABASE_HOST_PLACEHOLDER|'$DATABASE_HOST'|g' src/env/env.ts
+sed -i -e 's|DATABASE_PORT_PLACEHOLDER|'$DATABASE_PORT'|g' src/env/env.ts
 sed -i -e 's|DATABASE_NAME_PLACEHOLDER|'$DATABASE_NAME'|g' src/env/env.ts
 sed -i -e 's|DATABASE_USER_PLACEHOLDER|'$DATABASE_USER'|g' src/env/env.ts
 sed -i -e 's|DATABASE_PASSWORD_PLACEHOLDER|'$DATABASE_PASSWORD'|g' src/env/env.ts

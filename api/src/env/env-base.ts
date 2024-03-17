@@ -8,6 +8,7 @@ export const env: any = {
     // DATABASE
     database_type: 'DATABASE_TYPE_PLACEHOLDER',
     database_host: 'DATABASE_HOST_PLACEHOLDER',
+    database_port: 'DATABASE_PORT_PLACEHOLDER',
     database_name: 'DATABASE_NAME_PLACEHOLDER',
     database_user: 'DATABASE_USER_PLACEHOLDER',
     database_password: 'DATABASE_PASSWORD_PLACEHOLDER',
