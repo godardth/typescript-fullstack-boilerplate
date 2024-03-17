@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user';
-import { EnvService } from 'src/app/env.service';
+import { EnvService } from 'src/app/env/env.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +39,7 @@ export class AuthService {
   }
 
   login(email?: string, password?: string) {
-    let baseUrl = this.envService.getBaseUrl();
-    let url = `${baseUrl}auth/login/`;
+    let url = `${this.envService.backendUrl}auth/login/`;
     let payload = JSON.stringify({ email: email, password: password });
     this.http.post(url, email ? payload : undefined, { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
@@ -49,42 +48,36 @@ export class AuthService {
   }
 
   getUser() {
-    let baseUrl = this.envService.getBaseUrl();
-    this.http.get(`${baseUrl}auth/login/`, { headers: this.headers }).subscribe({
+    this.http.get(`${this.envService.backendUrl}auth/login/`, { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
       error: () => this.user$.next(undefined)
     });
   }
 
   saveUser(user?: User) {
-    let baseUrl = this.envService.getBaseUrl();
-    this.http.post(`${baseUrl}auth/users/`, JSON.stringify(user), { headers: this.headers }).subscribe({
+    this.http.post(`${this.envService.backendUrl}auth/users/`, JSON.stringify(user), { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
       error: () => this.user$.next(undefined)
     });
   }
 
   sendActivationMail() {
-    let baseUrl = this.envService.getBaseUrl();
-    this.http.get(`${baseUrl}auth/sendmail/`, { headers: this.headers }).subscribe();
+    this.http.get(`${this.envService.backendUrl}auth/sendmail/`, { headers: this.headers }).subscribe();
   }
 
   activate(email: string, token: string) {
-    let baseUrl = this.envService.getBaseUrl();
-    this.http.post(`${baseUrl}auth/activate/`, { email: email, activationToken: token }, { headers: this.headers }).subscribe({
+    this.http.post(`${this.envService.backendUrl}auth/activate/`, { email: email, activationToken: token }, { headers: this.headers }).subscribe({
       next: (user: any) => this.user$.next(new User(user)),
       error: () => this.user$.next(undefined)
     });
   }
 
   deleteAccount() {
-    let baseUrl = this.envService.getBaseUrl();
-    this.http.delete(`${baseUrl}auth/delete/`).subscribe(() => this.logout());
+    this.http.delete(`${this.envService.backendUrl}auth/delete/`).subscribe(() => this.logout());
   }
 
   signup(user: User) {
-    let baseUrl = this.envService.getBaseUrl();
-    let url = `${baseUrl}auth/signup/`;
+    let url = `${this.envService.backendUrl}auth/signup/`;
     let payload = JSON.stringify(user);
     this.http.post(url, payload, { headers: this.headers }).subscribe();
   }

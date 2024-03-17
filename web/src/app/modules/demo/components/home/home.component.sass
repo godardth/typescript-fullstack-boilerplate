@@ -1,0 +1,56 @@
+:host
+    display: flex
+    height: 100%
+    width: 100%
+
+    .col 
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        flex: 1 1 50%
+        padding: 50px
+
+    .left-col
+        gap: 50px
+        background: #000000
+        color: #FFFFFF
+
+        .github-ref a
+            color: #FFFFFF
+            text-decoration: none
+            cursor: pointer
+            font-size: 1.2rem
+            font-weight: 300
+            fa-icon
+                margin-right: 7px
+
+        .logos 
+            display: flex
+            gap: 50px
+            .logo-column
+                display: flex
+                flex-direction: column
+                align-items: center
+                padding: 25px
+                border: 1px solid #3a3131
+                border-radius: 9px
+                .logo-header
+                    height: 100px
+                    width: 100px
+                .sub-logos
+                    display: flex
+                    flex-direction: column
+                    gap: 10px
+                    padding-top: 25px
+                    .sub-logo
+                        display: flex
+                        gap: 10px
+                        align-items: center
+                        .sub-logo-container
+                            height: 30px
+                            width: 30px
+                img
+                    max-width: 100%
+                    max-height: 100%
+                    object-fit: contain

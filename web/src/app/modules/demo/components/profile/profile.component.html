@@ -1,0 +1,49 @@
+<div class="user-card">
+
+    <div class="profile-picture">
+        <img src="https://github.com/angular/angular/raw/main/aio/src/assets/images/logos/angular/angular_renaissance.png" />
+    </div>
+
+    <div class="profile-info">
+
+        <ng-container *ngIf="!user">
+            <div class="name">{{ (authService.user$ | async)?.firstName }} {{ (authService.user$ | async)?.lastName }}</div>
+            <div class="email">{{ (authService.user$ | async)?.email }}</div>
+        </ng-container>
+
+        <ng-container *ngIf="user && profileEditForm">
+            <form class="profile-form" [formGroup]="profileEditForm" (ngSubmit)="save()">
+                <div class="form-name-container">
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input type="text" matInput formControlName="firstName">
+                        <mat-error *ngIf="firstNameErrors?.['required']">First name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput formControlName="lastName">
+                        <mat-error *ngIf="lastNameErrors?.['required']">Last name is required</mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+        </ng-container>
+
+    </div>
+
+    <div class="profile-actions">
+        <button mat-flat-button color="primary" (click)="edit()" *ngIf="!user">
+            <fa-icon [icon]="faPen"></fa-icon> Edit
+        </button>
+        <button mat-flat-button color="primary" (click)="save()" *ngIf="user">
+            <fa-icon [icon]="faSave"></fa-icon> Save
+        </button>
+        <button mat-flat-button color="primary" (click)="authService.logout()">
+            <fa-icon [icon]="faSignOut"></fa-icon> Logout
+        </button>
+        <button mat-flat-button color="warn" (click)="authService.deleteAccount()">
+            <fa-icon [icon]="faTrash"></fa-icon> Delete Account
+        </button>
+    </div>
+
+</div>
+
