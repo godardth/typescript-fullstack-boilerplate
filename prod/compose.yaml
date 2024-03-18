@@ -12,7 +12,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
-      - ./nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+      - ./conf/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: always
   nginx-proxy-acme:
