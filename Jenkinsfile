@@ -4,8 +4,8 @@ node {
         docker.withRegistry('https://localhost:5001') {
             stage('Build') {
                 checkout scm
-                apiImage = docker.build("app/api:latest", "../api")
-                webImage = docker.build("app/web:latest", "../web")
+                apiImage = docker.build("app/api:latest", "./api")
+                webImage = docker.build("app/web:latest", "./web")
             }
             stage('Test') {
 
