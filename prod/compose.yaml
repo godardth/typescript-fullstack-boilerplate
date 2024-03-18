@@ -15,6 +15,7 @@ services:
       - ./conf/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: always
+
   nginx-proxy-acme:
     image: nginxproxy/acme-companion
     volumes:
@@ -40,6 +41,7 @@ services:
     depends_on:
       - nginx-proxy-acme
     restart: always
+
   registry-local:
     image: registry
     ports:
@@ -64,6 +66,8 @@ services:
       - JENKINS_URL=${JENKINS_URL}
     depends_on:
       - nginx-proxy-acme
+      - registry-local
+      - registry
     restart: always
 
   ## APP
