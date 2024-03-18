@@ -50,8 +50,7 @@ services:
 
   ## JENKINS
   jenkins:
-    build:
-      context: ./jenkins
+    build: ./jenkins
     volumes:
       - jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
@@ -60,6 +59,9 @@ services:
       - LETSENCRYPT_HOST=${DOMAIN_JENKINS}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
       - VIRTUAL_PORT=8080
+      - JENKINS_ADMIN_ID=${JENKINS_ADMIN_ID}
+      - JENKINS_ADMIN_PASSWORD=${JENKINS_ADMIN_PASSWORD}
+      - JENKINS_URL=${JENKINS_URL}
     depends_on:
       - nginx-proxy-acme
     restart: always
