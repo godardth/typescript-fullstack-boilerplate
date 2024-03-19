@@ -76,7 +76,7 @@ services:
     command: sh -c ""
     environment:
       - VIRTUAL_HOST=${DOMAIN_API}
-      - VIRTUAL_PORT=3000
+      - VIRTUAL_PORT=3001
       - LETSENCRYPT_HOST=${DOMAIN_API}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
