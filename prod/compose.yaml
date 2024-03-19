@@ -73,22 +73,10 @@ services:
   ## APP
   api:
     image: localhost:5001/app/api:latest
-    command: sh -c ""
     environment:
       - VIRTUAL_HOST=${DOMAIN_API}
       - VIRTUAL_PORT=3001
       - LETSENCRYPT_HOST=${DOMAIN_API}
-      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
-    depends_on:
-      - registry-local
-    restart: always
-
-  web:
-    image: localhost:5001/app/web:latest
-    working_dir: /home/dev
-    environment:
-      - VIRTUAL_HOST=${DOMAIN_WEB}
-      - LETSENCRYPT_HOST=${DOMAIN_WEB}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
       - FRONTEND_PROT=${FRONTEND_PROT}
       - FRONTEND_HOST=${FRONTEND_HOST}
@@ -106,6 +94,17 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
     depends_on:
+      - registry-local
+    restart: always
+
+  web:
+    image: localhost:5001/app/web:latest
+    working_dir: /home/dev
+    environment:
+      - VIRTUAL_HOST=${DOMAIN_WEB}
+      - LETSENCRYPT_HOST=${DOMAIN_WEB}
+      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
+    depends_on:
       - nginx-proxy-acme
       - registry-local
     restart: always
@@ -117,7 +116,7 @@ services:
       - WATCHTOWER_CLEANUP=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 root-api-1 root-web-1
+    command: --interval 30 prod-api-1 prod-web-1
     restart: always
 
 volumes:
