@@ -73,7 +73,7 @@ services:
   ## APP
   api:
     image: localhost:5001/app/api:latest
-    command: sh -c "bash -c npm run start:prod"
+    command: sh -c ""
     environment:
       - VIRTUAL_HOST=${DOMAIN_API}
       - VIRTUAL_PORT=3000
@@ -82,6 +82,7 @@ services:
     depends_on:
       - registry-local
     restart: always
+
   web:
     image: localhost:5001/app/web:latest
     working_dir: /home/dev
@@ -89,6 +90,21 @@ services:
       - VIRTUAL_HOST=${DOMAIN_WEB}
       - LETSENCRYPT_HOST=${DOMAIN_WEB}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
+      - FRONTEND_PROT=${FRONTEND_PROT}
+      - FRONTEND_HOST=${FRONTEND_HOST}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - DATABASE_TYPE=${DATABASE_TYPE}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_SYNC=${DATABASE_SYNC}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
     depends_on:
       - nginx-proxy-acme
       - registry-local
