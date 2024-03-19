@@ -70,6 +70,20 @@ services:
       - registry
     restart: always
 
+  ## DATABASE
+  db:
+    image: postgres
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+    volumes:
+      - psql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST=${DATABASE_HOST}
+      - POSTGRES_PORT=${DATABASE_PORT}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+
   ## APP
   api:
     image: localhost:5001/app/api:latest
@@ -94,6 +108,7 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
     depends_on:
+      - db
       - registry-local
     restart: always
 
@@ -126,3 +141,4 @@ volumes:
   html:
   certs:
   acme:
+  psql:
