@@ -11,6 +11,6 @@ RUN npm install --quiet
 COPY . /home/prod
 WORKDIR /home/prod
 RUN ../node_modules/.bin/ng build
-RUN mv /home/prod/dist/* /usr/share/nginx/html
+RUN mv /home/prod/dist/web/* /usr/share/nginx/html
 RUN rm -rf /home/prod
 COPY nginx.conf /etc/nginx/nginx.conf
