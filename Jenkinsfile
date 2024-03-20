@@ -3,8 +3,11 @@ node {
     try {
 	echo "ENV ${env.DATABASE_TYPE}"
         docker.withRegistry('https://localhost:5001') {
-            stage('Build') {
-                checkout scm
+            stage('Configure') {
+		load "./prod/.env"
+		echo "DATABASE TYPE = ${DATABASE_TYPE}"
+            }
+	    stage('Build') {
                 apiImage = docker.build("app/api:latest", "./api")
                 webImage = docker.build("app/web:latest", "./web")
             }
