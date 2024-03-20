@@ -1,25 +1,37 @@
-node {
+pipeline {
+    agent any
 
-    try {
-        docker.withRegistry('https://localhost:5001') {
-            stage('Build') {
-                checkout scm
-                apiImage = docker.build("app/api:latest", "./api")
-                webImage = docker.build("app/web:latest", "./web")
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/godardth/typescript-fullstack-boilerplate.git'
             }
-            stage('Test') {
-
+        }
+        stage('Configure') {
+            steps {
+                dir("${workspace}") {
+                    sh 'cd api; sh ./configure.sh'
+                    sh 'cd web; sh ./configure.sh'
+                }
             }
-            stage('Push') {
-                apiImage.push('latest')
-                webImage.push('latest')
+        }
+        stage('Build') {
+            steps {
+                script {
+                    api = docker.build('app/api:latest', './api')
+                    web = docker.build('app/web:latest', './web')
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://localhost:5001') {
+                        api.push('latest')
+                        web.push('latest')
+                    }
+                }
             }
         }
     }
-
-    catch (err) {
-        echo "Build failed :face_with_head_bandage: \n`${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
-        throw err
-    }
-
 }

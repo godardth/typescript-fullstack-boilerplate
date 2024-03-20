@@ -1,3 +1,5 @@
+ARG DATABASE_TYPE
+
 FROM node:18
 
 WORKDIR /usr/src/app/dev
