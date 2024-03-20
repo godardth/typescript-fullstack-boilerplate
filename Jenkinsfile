@@ -1,6 +1,7 @@
 node {
 
     try {
+	echo "ENV ${env.DATABASE_TYPE}"
         docker.withRegistry('https://localhost:5001') {
             stage('Build') {
                 checkout scm
