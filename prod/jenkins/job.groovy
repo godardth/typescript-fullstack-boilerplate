@@ -6,7 +6,7 @@ pipelineJob('TypeScript-Fullstack-Boilerplate') {
           remote {
             url('https://github.com/godardth/typescript-fullstack-boilerplate.git')
           }
-          branch('*/build')
+          branch('build')
         }
       }
     }
