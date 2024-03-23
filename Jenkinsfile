@@ -1,11 +1,10 @@
 node {
 
     try {
-	echo "ENV ${env.DATABASE_TYPE}"
         docker.withRegistry('https://localhost:5001') {
             stage('Configure') {
-		load "./prod/.env"
-		echo "DATABASE TYPE = ${DATABASE_TYPE}"
+                sh('./api/configure.sh')
+                sh('./web/configure.sh')                
             }
 	    stage('Build') {
                 apiImage = docker.build("app/api:latest", "./api")
