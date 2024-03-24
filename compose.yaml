@@ -15,44 +15,24 @@ services:
 
   api:
     build: ./api
-    command: sh ./startup-dev-server.sh
+    command: sh -c 'cd api; ./configure.sh; npm run start:debug'
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
       - 9229:9229
-    environment:
-      - FRONTEND_PROT=${FRONTEND_PROT}
-      - FRONTEND_HOST=${FRONTEND_HOST}
-      - FRONTEND_PORT=${FRONTEND_PORT}
-      - DATABASE_TYPE=${DATABASE_TYPE}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_SYNC=${DATABASE_SYNC}
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=${SMTP_PORT}
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - JWT_SECRET=${JWT_SECRET}
     volumes:
-      - ./api:/usr/src/app/dev
+      - ./:/usr/src/app/dev
     depends_on:
       - db
 
   web:
     build: 
       context: ./web
+    working_dir: /home/dev
+    command: sh -c 'cd web; sh configure.sh; ./node_modules/.bin/ng serve --host 0.0.0.0'
     ports:
       - ${FRONTEND_PORT}:4200
-    environment:
-      - BACKEND_PROT=${BACKEND_PROT}
-      - BACKEND_HOST=${BACKEND_HOST}
-      - BACKEND_PORT=${BACKEND_PORT}
     volumes:
-      - ./web:/home/dev
-    working_dir: /home/dev
-    command: sh ./startup-dev-server.sh
+      - ./:/home/dev
     depends_on:
       - api
 
