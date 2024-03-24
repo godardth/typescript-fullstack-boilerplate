@@ -89,7 +89,7 @@ services:
     image: localhost:5001/app/api:latest
     environment:
       - VIRTUAL_HOST=${DOMAIN_API}
-      - VIRTUAL_PORT=3001
+      - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=${DOMAIN_API}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:

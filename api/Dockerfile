@@ -10,6 +10,6 @@ RUN npm install --quiet
 COPY . .
 RUN npm run build
 
-# Start Production Server (Port 3001)
-EXPOSE 3001
+# Start Production Server
+EXPOSE 3000
 CMD ["npm", "run", "start:prod"]
