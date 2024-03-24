@@ -1,5 +1,3 @@
-ARG ENV_FILE=../prod/.env
-
 FROM node:18
 
 # Install Dependencies
@@ -10,7 +8,6 @@ RUN npm install --quiet
 
 # Copy Source Code & Build
 COPY . .
-RUN sh -c "sh ./configure.sh ${ENV_FILE}"
 RUN npm run build
 
 # Start Production Server (Port 3001)
