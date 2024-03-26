@@ -21,3 +21,4 @@ ws-cleanup:latest
 job-dsl:latest
 docker-plugin:latest
 docker-workflow:latest
+startup-trigger-plugin:latest

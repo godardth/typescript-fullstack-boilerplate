@@ -11,7 +11,17 @@ pipelineJob('TypeScript-Fullstack-Boilerplate') {
       }
     }
   }
-  triggers {
-    githubPush() 
+  properties {
+    pipelineTriggers {
+      triggers {
+        githubPush()
+        hudsonStartupTrigger {
+          nodeParameterName("built-in")
+          label("built-in")
+          quietPeriod("0")
+          runOnChoice("False")
+        }
+      }
+    }
   }
 }
