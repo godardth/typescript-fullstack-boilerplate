@@ -25,6 +25,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+[![Screen Shot][product-screenshot]]
+
 TypeScript Fullstack Boilerplate provides developers with a robust foundation for building scalable web applications. Leveraging the power of NestJS for the backend and Angular for the frontend, this boilerplate accelerates development while maintaining best practices.
 
 Key Features:
@@ -126,6 +128,6 @@ Theo Godard - theo.godard@gmail.com
 [issues-url]: https://github.com/godardth/typescript-fullstack-boilerplate/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/godardth
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/Screenshot-1.png
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-url]: https://angular.io/
