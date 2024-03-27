@@ -25,7 +25,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Screen Shot][product-screenshot]]
+![Screen Shot][product-screenshot]
 
 TypeScript Fullstack Boilerplate provides developers with a robust foundation for building scalable web applications. Leveraging the power of NestJS for the backend and Angular for the frontend, this boilerplate accelerates development while maintaining best practices.
 
