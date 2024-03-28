@@ -60,6 +60,12 @@ Clone the project on your local machine
 git clone git@github.com:godardth/typescript-fullstack-boilerplate.git # Replace by your own fork
 ```
 
+Make a copy of the template env file and fill in the configuration
+```sh
+cp .env-template .env
+nano .env
+```
+
 Launch the backend and frontend development server
 ```sh
 cd typescript-fullstack-boilerplate
@@ -80,6 +86,7 @@ cd typescript-fullstack-boilerplate/prod
 
 Configure the production server.
 ```sh
+cp .env-template .env
 nano .env
 ```
 

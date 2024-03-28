@@ -32,18 +32,6 @@ services:
   ## DOCKER REGISTRY
   registry:
     image: registry
-    volumes:
-      - registry:/var/lib/registry
-    environment:
-      - VIRTUAL_HOST=${DOMAIN_REGISTRY}
-      - LETSENCRYPT_HOST=${DOMAIN_REGISTRY}
-      - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
-    depends_on:
-      - nginx-proxy-acme
-    restart: always
-
-  registry-local:
-    image: registry
     ports:
       - 5001:5000
     volumes:
@@ -66,7 +54,6 @@ services:
       - JENKINS_URL=${JENKINS_URL}
     depends_on:
       - nginx-proxy-acme
-      - registry-local
       - registry
     restart: always
 
@@ -88,25 +75,25 @@ services:
   api:
     image: localhost:5001/app/api:latest
     environment:
-      - VIRTUAL_HOST=${DOMAIN_API}
-      - VIRTUAL_PORT=3000
-      - LETSENCRYPT_HOST=${DOMAIN_API}
+      - VIRTUAL_HOST=${BACKEND_HOST}
+      - VIRTUAL_PORT=${BACKEND_PORT}
+      - LETSENCRYPT_HOST=${BACKEND_HOST}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
       - db
-      - registry-local
+      - registry
     restart: always
 
   web:
     image: localhost:5001/app/web:latest
     working_dir: /home/dev
     environment:
-      - VIRTUAL_HOST=${DOMAIN_WEB}
-      - LETSENCRYPT_HOST=${DOMAIN_WEB}
+      - VIRTUAL_HOST=${FRONTEND_HOST}
+      - LETSENCRYPT_HOST=${FRONTEND_HOST}
       - LETSENCRYPT_EMAIL=${DOMAIN_ADMIN}
     depends_on:
       - nginx-proxy-acme
-      - registry-local
+      - registry
     restart: always
 
   ## WATCHTOWER
@@ -118,6 +105,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --interval 30 prod-api-1 prod-web-1
     restart: always
+    depends_on:
+      - api
+      - web
 
 volumes:
   jenkins:
