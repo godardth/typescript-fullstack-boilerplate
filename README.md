@@ -41,6 +41,12 @@ Key Features:
 <br />
 With the boilerplate, developers can focus on building innovative features and functionality, confident in the robustness and scalability of the underlying architecture. Whether you're a seasoned developer or just starting, this TypeScript Fullstack Boilerplate streamlines the development process and empowers you to create exceptional web applications with ease.
 
+## Architecture
+
+![Architecture][product-architecture]
+
+[Original File](https://docs.google.com/presentation/d/1zd2_xOD3Uk10fGAiYYR8osOaK6qYwUFT5rRdG4voFEA/edit?usp=sharing)
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -136,5 +142,6 @@ Theo Godard - theo.godard@gmail.com
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/godardth
 [product-screenshot]: images/Screenshot-1.png
+[product-architecture]: images/architecture.png
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-url]: https://angular.io/
