@@ -1,0 +1,52 @@
+:host
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: 100%
+    border: 1px solid #dbdddf
+    background: #f4f5f6
+    .header
+        text-align: center
+        padding: 10px
+        font-weight: 500
+    .columns, .response
+        height: 100%
+        flex: 1 1 auto
+    .columns
+        display: flex
+        justify-content: space-between
+        .column
+            display: flex
+            flex-direction: column
+            flex: 1 1 100px
+            .form-container
+                display: flex
+                flex-direction: column
+                gap: 15px
+                align-items: center
+                margin: 20px 0px
+            .title
+                background: #e4e4e4
+                text-align: center
+                font-weight: 500
+                padding: 5px
+                border-top: 1px solid #a2a2a2
+                border-bottom: 1px solid #a2a2a2
+            &.list
+                .item
+                    display: flex
+                    justify-content: space-between
+                    padding: 10px
+                    align-items: baseline
+                    cursor: pointer
+                    &:hover
+                        background: #e4e4e4
+                    .button:hover
+                        color: blue
+    .response
+        background: #EEE
+        padding: 15px
+        border-top: 1px solid #a2a2a2
+        .text-bold
+            font-weight: 500
+            margin-bottom: 10px

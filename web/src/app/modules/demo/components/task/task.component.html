@@ -1,0 +1,58 @@
+<div class="header">REST API Demo (CRUD)</div>
+<div class="columns">
+
+    <div class="column list">
+        <div class="title">LIST
+            <fa-icon [icon]="faArrowsRotate" (click)="getAll()"></fa-icon>
+        </div>
+        <div class="item" *ngFor="let task of tasks" (click)="getOne(task.id)">
+            <div class="name">{{ task.name }}</div>
+            <div class="button" (click)="delete(task.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="title">DETAILS</div>
+        <ng-container *ngIf="task && editForm">
+            <form class="profile-form" [formGroup]="editForm" (ngSubmit)="save()">
+                <div class="form-container">
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input type="text" matInput formControlName="name">
+                        <mat-error *ngIf="nameEditErrors?.['required']">Name is required</mat-error>
+                    </mat-form-field>
+                    <button mat-flat-button color="primary" [disabled]="!editForm.valid">
+                        <fa-icon [icon]="faSave"></fa-icon> Save
+                    </button>
+                </div>
+            </form>
+        </ng-container>
+    </div>
+
+    <div class="column create">
+        <div class="title">CREATE</div>
+        <div class="form">
+            <ng-container *ngIf="createForm">
+                <form class="profile-form" [formGroup]="createForm" (ngSubmit)="create()">
+                    <div class="form-container">
+                        <mat-form-field>
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput formControlName="name">
+                            <mat-error *ngIf="nameCreateErrors?.['required']">Name is required</mat-error>
+                        </mat-form-field>
+                        <button mat-flat-button color="primary" [disabled]="!createForm.valid">
+                            <fa-icon [icon]="faSave"></fa-icon> Save
+                        </button>
+                    </div>
+                </form>
+            </ng-container>
+        </div>
+    </div>
+
+</div>
+<div class="response">
+    <div class="text-bold">RESPONSE</div>
+    <div>{{ response }}</div>
+</div>

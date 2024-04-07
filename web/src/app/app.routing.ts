@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './modules/demo/components/home/home.component';
 import { GuardService } from './modules/auth/services/guard.service';
 import { DemoComponent } from './modules/demo/components/demo/demo.component';

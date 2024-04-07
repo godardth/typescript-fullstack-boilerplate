@@ -9,6 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './components/home/home.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { TaskComponent } from './components/task/task.component';
+import { TasksService } from './services/tasks.service';
 
 @NgModule({
   imports: [
@@ -22,9 +25,14 @@ import { ProfileComponent } from './components/profile/profile.component';
     FontAwesomeModule
   ],
   declarations: [
+    ChatComponent,
+    TaskComponent,
+    DemoComponent,
     HomeComponent,
-    ProfileComponent,
-    DemoComponent
+    ProfileComponent
+  ],
+  providers: [
+    TasksService
   ]
 })
 export class DemoModule { }

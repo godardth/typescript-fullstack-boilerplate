@@ -5,7 +5,7 @@ import { faSignOut, faTrash, faPen, faSave } from '@fortawesome/free-solid-svg-i
 import { User } from '../../../auth/models/user';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'demo-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.sass']
 })
