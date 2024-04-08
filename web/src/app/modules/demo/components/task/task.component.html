@@ -7,9 +7,6 @@
         </div>
         <div class="item" *ngFor="let task of tasks" (click)="getOne(task.id)">
             <div class="name">{{ task.name }}</div>
-            <div class="button" (click)="delete(task.id)">
-                <fa-icon [icon]="faTrash"></fa-icon>
-            </div>
         </div>
     </div>
 
@@ -23,9 +20,14 @@
                         <input type="text" matInput formControlName="name">
                         <mat-error *ngIf="nameEditErrors?.['required']">Name is required</mat-error>
                     </mat-form-field>
-                    <button mat-flat-button color="primary" [disabled]="!editForm.valid">
-                        <fa-icon [icon]="faSave"></fa-icon> Save
-                    </button>
+                    <div class="buttons">
+                        <button mat-flat-button color="warn" type="button" [disabled]="!editForm.valid" (click)="delete(task.id)">
+                            <fa-icon [icon]="faTrash"></fa-icon> Delete
+                        </button>
+                        <button mat-flat-button color="primary" type="submit" [disabled]="!editForm.valid">
+                            <fa-icon [icon]="faSave"></fa-icon> Update
+                        </button>
+                    </div>
                 </div>
             </form>
         </ng-container>

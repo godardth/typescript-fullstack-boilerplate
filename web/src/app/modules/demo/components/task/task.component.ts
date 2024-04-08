@@ -56,6 +56,8 @@ export class TaskComponent implements OnInit {
   delete(id?: number) {
     if (!id) return;
     this.tasksService.delete(id).subscribe((res: any) => {
+      this.task = undefined;
+      this.editForm = undefined;
       this.response = JSON.stringify(res);
     });
   }
